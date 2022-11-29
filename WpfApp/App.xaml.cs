@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WebApi.Services;
 using WpfApp.Contexts;
 using WpfApp.Models.Entities;
 
@@ -26,6 +27,7 @@ namespace WpfApp
             {
                 services.AddScoped<MainWindow>();
                 services.AddDbContext<DataContext>(x => x.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\munta\\OneDrive\\Skrivbord\\cs\\InlämningsUppgift\\WpfApp\\Contexts\\wpf_local_sql_db.mdf;Integrated Security=True;Connect Timeout=30"));
+                services.AddScoped<CustomerService>();            
             }).Build();
         }
 

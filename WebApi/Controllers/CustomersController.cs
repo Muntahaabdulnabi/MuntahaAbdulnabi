@@ -5,6 +5,7 @@ using System.Reflection.Metadata.Ecma335;
 using WebApi.Contexts;
 using WebApi.Models;
 using WebApi.Models.Entities;
+using WebApi.Services;
 
 namespace WebApi.Controllers
 {
@@ -12,11 +13,11 @@ namespace WebApi.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly CustomerService _customerService;
 
-        public CustomersController(DataContext context)
+        public CustomersController(CustomerService customerService)
         {
-            _context = context;
+            _customerService = customerService;
         }
 
         [HttpPost]
@@ -24,17 +25,10 @@ namespace WebApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                var customerEntity = new CustomerEntity
                 {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Email = model.Email,
-                    Phone = model.Phone,
-                    Address = model.Address
-                };
-                _context.Customers.Add(customerEntity);
-                await _context.SaveChangesAsync();
-                return new OkResult();
+                    await _customerService.Create(model);
+                      return new OkResult();
+                }   
             }
             return BadRequest(ModelState);
         }
@@ -42,18 +36,16 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var customers = new List<CustomerModel>();
-            foreach (var customer in await _context.Customers.ToListAsync())
-                customers.Add(new CustomerModel { Id = customer.Id, FirstName = customer.FirstName, LastName = customer.LastName, Email = customer.Email, Phone = customer.Phone, Address = customer.Address });
-            return new OkObjectResult(customers);
+           
+            return new OkObjectResult(await _customerService.GetAll());
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var customerEntity = await _context.Customers.FindAsync(id);
-            if (customerEntity != null)
-                return new OkObjectResult(new CustomerModel { Id = customerEntity.Id, FirstName = customerEntity.FirstName, LastName = customerEntity.LastName, Email = customerEntity.Email, Phone = customerEntity.Phone, Address = customerEntity.Address });
+            var result = await _customerService.Get(id);
+            if(result != null)
+            return new OkObjectResult(result);
            
             return new NotFoundResult();
         }
