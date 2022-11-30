@@ -1,6 +1,6 @@
 ﻿namespace WebApi.Models
 {
-    internal class ProductModel
+    public class ProductModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = null!;

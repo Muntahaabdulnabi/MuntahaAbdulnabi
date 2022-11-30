@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 using WebApi.Models;
 using WebApi.Models.Entities;
 using WpfApp.Contexts;
@@ -20,6 +19,7 @@ namespace WpfApp.Services
         {
             _context = context;
         }
+
 
         public async Task Create(CustomerCreateModel model)
         {

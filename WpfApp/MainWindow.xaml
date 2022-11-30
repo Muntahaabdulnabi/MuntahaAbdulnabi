@@ -7,6 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
+            <StackPanel Grid.Column="0">
+                <Button x:Name="btn_customerPage" Content="Customer" Click="btn_customerPage_Click"/>
+                <Button x:Name="btn_productPage" Content="Product" Click="btn_productPage_Click"/>
+                <Button x:Name="btn_orderPage" Content="Order" Click="btn_orderPage_Click"/>
+            </StackPanel>
+
+            <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+        </Grid>
     </Grid>
 </Window>
