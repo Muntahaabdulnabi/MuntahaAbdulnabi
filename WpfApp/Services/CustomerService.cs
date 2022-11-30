@@ -22,7 +22,7 @@ namespace WpfApp.Services
         }
 
 
-        public async Task Create(CustomerCreateModel model)
+        public async Task CreateAsync(CustomerCreateModel model)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace WpfApp.Services
             catch { }
         }
 
-        public async Task<IEnumerable<CustomerModel>> GetAll()
+        public async Task<IEnumerable<CustomerModel>> GetAllAsync()
         {
             var customers = new List<CustomerModel>();
             foreach (var customer in await _context.Customers.ToListAsync())
@@ -48,7 +48,7 @@ namespace WpfApp.Services
             return customers;
         }
 
-        public async Task<CustomerModel> Get(int id)
+        public async Task<CustomerModel> GetAsync(int id)
         {
             var customerEntity = await _context.Customers.FindAsync(id);
             if (customerEntity != null)
@@ -57,7 +57,7 @@ namespace WpfApp.Services
             return null!;
         }
 
-        public async Task<IActionResult> PutCustomerEntity(int id, CustomerModel customerModel)
+        public async Task<IActionResult> updateAsync(int id, CustomerModel customerModel)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace WpfApp.Services
             return new BadRequestResult();
         }
 
-        public async Task<IActionResult> DeleteCustomerEntity(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             try
             {
