@@ -83,7 +83,21 @@ namespace WpfApp.Services
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message); }
             return new BadRequestResult();
+        }
 
+        public async Task<IActionResult> DeleteCustomerEntity(int id)
+        {
+            try
+            {
+                var customerEntity = await _context.Customers.FindAsync(id);
+                if (customerEntity == null)
+                    return new NotFoundResult();
+                _context.Customers.Remove(customerEntity);
+                await _context.SaveChangesAsync();
+
+                return new OkResult();
+            }catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            return new BadRequestResult();
         }
     }
 }
