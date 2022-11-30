@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,6 +55,35 @@ namespace WpfApp.Services
                 return new CustomerModel { Id = customerEntity.Id, FirstName = customerEntity.FirstName, LastName = customerEntity.LastName, Email = customerEntity.Email, Phone = customerEntity.Phone, Address = customerEntity.Address };
 
             return null!;
+        }
+
+        public async Task<IActionResult> PutCustomerEntity(int id, CustomerModel customerModel)
+        {
+            try
+            {
+                if (id != customerModel.Id)
+                {
+                    return new BadRequestResult();
+                }
+                var customerEntity = await _context.Customers.FindAsync(id);
+                if (customerEntity != null)
+                {
+                    customerEntity.FirstName = customerModel.FirstName;
+                    customerEntity.LastName = customerModel.LastName;
+                    customerEntity.Email = customerModel.Email;
+                    customerEntity.Phone = customerModel.Phone;
+                    customerEntity.Address = customerModel.Address;
+
+                    await _context.SaveChangesAsync();
+
+                    return new OkResult();
+                }
+                return new NotFoundResult();
+               
+            }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            return new BadRequestResult();
+
         }
     }
 }
