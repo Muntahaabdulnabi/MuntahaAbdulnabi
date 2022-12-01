@@ -23,7 +23,7 @@ namespace WpfApp
             app = Host.CreateDefaultBuilder().ConfigureServices(services =>
             {
                 services.AddScoped<MainWindow>();
-                services.AddDbContext<DataContext>(x => x.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\munta\\OneDrive\\Skrivbord\\cs\\InlämningsUppgift\\WpfApp\\Contexts\\wpf_local_sql_db.mdf;Integrated Security=True;Connect Timeout=30"));
+                services.AddDbContext<DataContext>(x => x.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\munta\\OneDrive\\Skrivbord\\cs\\InlämningsUppgift\\WebApi\\Contexts\\local_Sql_db.mdf;Integrated Security=True;Connect Timeout=30"));
                 services.AddScoped<CustomerService>();
                 services.AddScoped<ProductService>();
                 services.AddScoped<OrderService>();

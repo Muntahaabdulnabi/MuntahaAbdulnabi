@@ -50,11 +50,6 @@ namespace WebApi.Controllers
             return new NotFoundResult();
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id)
-        {
-            
-        }
-       
+        
     }
 }
