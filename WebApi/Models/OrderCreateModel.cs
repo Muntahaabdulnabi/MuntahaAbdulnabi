@@ -10,5 +10,6 @@
         public string? StreetNumber { get; set; }
         public string PostalCode { get; set; } = null!;
         public string City { get; set; } = null!;
+        public List<ProductModel> Products { get; set; }
     }
 }

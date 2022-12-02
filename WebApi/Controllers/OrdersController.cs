@@ -26,13 +26,16 @@ namespace WebApi.Controllers
                 var orderEntity = new OrderEntity
                 {
                     CreatedDate = DateTime.Now,
-                    DueDate = DateTime.Now,
+                    DueDate = DateTime.Now.AddDays(30),
                     CustomerName = model.CustomerName,
+                    TotalPrice = model.TotalPrice,
                     StreetName = model.StreetName,
                     StreetNumber = model.StreetNumber,
                     PostalCode = model.PostalCode,
                     City = model.City,
                 };
+
+
                 _context.Orders.Add(orderEntity);
                 await _context.SaveChangesAsync();
                 return new OkResult();
@@ -49,8 +52,9 @@ namespace WebApi.Controllers
                 {
                     Id = order.Id,
                     CreatedDate = DateTime.Now,
-                    DueDate = DateTime.Now,
+                    DueDate = DateTime.Now.AddDays(30),
                     CustomerName = order.CustomerName,
+                    TotalPrice= order.TotalPrice,
                     StreetName = order.StreetName,
                     StreetNumber = order.StreetNumber,
                     PostalCode = order.PostalCode,
@@ -68,8 +72,9 @@ namespace WebApi.Controllers
                 {
                     Id=orderEntity.Id,
                     CreatedDate= DateTime.Now,
-                    DueDate= DateTime.Now,
+                    DueDate= DateTime.Now.AddDays(30),
                     CustomerName = orderEntity.CustomerName,
+                    TotalPrice = orderEntity.TotalPrice,
                     StreetName= orderEntity.StreetName,
                     StreetNumber= orderEntity.StreetNumber,
                     PostalCode= orderEntity.PostalCode,
